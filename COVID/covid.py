@@ -107,17 +107,14 @@ load_files()
 
 # print(covid_df["ENTIDAD_RES"].value_counts())
 
-# for key in covid_df:
-#     print(key)
-
-# result = covid_df.to_json(r'export_dataframe.json', orient="records")
+result = covid_df.to_json(r'export_dataframe.json', orient="records")
 # parsed = json.loads(result)
 # json.dumps(parsed, indent=4)
 
-sex_by_state_df = covid_df[['sexo', 'entidad_res']]
-print("The data set contains " + str(sex_by_state_df.shape[0]) + " rows by " + str(sex_by_state_df.shape[1]) + " columns.")
-print(sex_by_state_df.head())
-result = sex_by_state_df.to_json(r'sexo_entidad_res.json', orient="records")
+# sex_by_state_df = covid_df[['sexo', 'entidad_res']]
+# print("The data set contains " + str(sex_by_state_df.shape[0]) + " rows by " + str(sex_by_state_df.shape[1]) + " columns.")
+# print(sex_by_state_df.head())
+# result = sex_by_state_df.to_json(r'sexo_entidad_res.json', orient="records")
 
 # TODO: Make sure you have virtualenv, django and djantorestframework
 
