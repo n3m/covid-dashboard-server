@@ -26,7 +26,7 @@ func (ep *CovidEndPoint) FiberHandler() func(c *fiber.Ctx) error {
 
 		params := models.FilterArguments{}
 
-		err := c.QueryParser(&params)
+		err := c.BodyParser(&params)
 		if err != nil {
 			return c.Status(http.StatusConflict).JSON(&models.Response{
 				Code: http.StatusConflict,

@@ -35,7 +35,7 @@ func SetRoutes(server *fiber.App, database *gojsonq.JSONQ) {
 
 	/* CUSTOM ENDPOINTS */
 	CovidEndpoint := infrastructure.NewCovidEndpoint(infrastructure.Input{DB: database})
-	server.Get("/covid/*", CovidEndpoint.FiberHandler())
+	server.Post("/covid/*", CovidEndpoint.FiberHandler())
 }
 
 func ReadAndParseDatabase(fileName string) *gojsonq.JSONQ {
