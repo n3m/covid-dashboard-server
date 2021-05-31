@@ -7,7 +7,7 @@ import (
 )
 
 func main() {
-	app := router.Init("./data.json")
+	app := router.Init("./COVID/export_dataframe.json")
 
 	defer log.Fatal(app.Listen(":3000"))
 }
