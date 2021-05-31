@@ -4,12 +4,13 @@ import (
 	"net/http"
 
 	"github.com/gofiber/fiber/v2"
+	_covidService "github.com/n3m/covid-dashboard-server/application/services/covid"
 	"github.com/n3m/covid-dashboard-server/domain/models"
 )
 
 func QueryCustom(c *fiber.Ctx) error {
 
-	params := models.FilterArguments{}
+	params := _covidService.Filter{}
 
 	err := c.BodyParser(&params)
 	if err != nil {
