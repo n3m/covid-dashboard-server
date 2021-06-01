@@ -16,6 +16,11 @@ type ByState struct {
 	Data  []*models.Case
 }
 
+type ByPrivPub struct {
+	Priv *map[string]*ByState
+	Pub  *map[string]*ByState
+}
+
 func QueryCustom(c *fiber.Ctx) error {
 
 	filter := _covidService.Filter{}
@@ -62,6 +67,14 @@ func QueryCustom(c *fiber.Ctx) error {
 				Data:  filteredDocs,
 				Count: len(*filteredDocs),
 			})
+		case "BYPRIVPUB":
+			filteredDocs := ConvertDataByPubPriv(documents)
+			return c.Status(http.StatusOK).JSON(&models.Response{
+				Code:  http.StatusOK,
+				Error: nil,
+				Data:  filteredDocs,
+				Count: 1,
+			})
 		}
 	}
 
@@ -92,4 +105,50 @@ func ConvertDataByState(docs *[]*models.Case) *map[string]*ByState {
 	}
 
 	return &states
+}
+
+func ConvertDataByPubPriv(docs *[]*models.Case) *ByPrivPub {
+	PubStates := map[string]*ByState{}
+	PrivStates := map[string]*ByState{}
+
+	for _, each := range *docs {
+		switch each.Origen {
+		case "PRIV":
+			if state, isOk := PrivStates[each.Entidad_Residencia]; !isOk {
+				PrivStates[each.Entidad_Residencia] = &ByState{
+					State: each.Entidad_Residencia,
+					Count: 1,
+					Data: []*models.Case{
+						each,
+					},
+				}
+			} else {
+				state.Count++
+				state.Data = append(state.Data, each)
+			}
+			break
+		case "PUB":
+			if state, isOk := PubStates[each.Entidad_Residencia]; !isOk {
+				PubStates[each.Entidad_Residencia] = &ByState{
+					State: each.Entidad_Residencia,
+					Count: 1,
+					Data: []*models.Case{
+						each,
+					},
+				}
+			} else {
+				state.Count++
+				state.Data = append(state.Data, each)
+			}
+			break
+		}
+
+	}
+
+	final := ByPrivPub{
+		Priv: &PrivStates,
+		Pub:  &PubStates,
+	}
+
+	return &final
 }
