@@ -45,7 +45,7 @@ type Case struct {
 	Clasificacion_Final   string      `json:"clasificacion_final"`
 	Migrante              string      `json:"migrante"`
 	Pais_Nacionalidad     string      `json:"pais_nacionalidad"`
-	Pais_Origen           float64     `json:"pais_origen"`
+	Pais_Origen           interface{} `json:"pais_origen"`
 	Uci                   string      `json:"uci"`
 	Fecha_Ingreso_Yr      float64     `json:"fecha_ingreso_yr"`
 	Fecha_Ingreso_Mt      float64     `json:"fecha_ingreso_mt"`

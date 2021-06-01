@@ -7,6 +7,7 @@ import (
 	"github.com/n3m/covid-dashboard-server/application/services"
 	_covidService "github.com/n3m/covid-dashboard-server/application/services/covid"
 	"github.com/n3m/covid-dashboard-server/domain/models"
+	"github.com/n3m/pprnt"
 	"github.com/thedevsaddam/gojsonq/v2"
 )
 
@@ -42,6 +43,8 @@ func QueryCustom(c *fiber.Ctx) error {
 			},
 		})
 	}
+
+	pprnt.Print(filter)
 
 	db, ok := c.Locals("db").(*gojsonq.JSONQ)
 	if !ok {
@@ -92,6 +95,8 @@ func QueryCustom(c *fiber.Ctx) error {
 			})
 		}
 	}
+
+	db = db.Reset()
 
 	return c.Status(http.StatusOK).JSON(&models.Response{
 		Code:  http.StatusOK,
