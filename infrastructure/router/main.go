@@ -5,6 +5,7 @@ import (
 	"time"
 
 	"github.com/gofiber/fiber/v2"
+	covid "github.com/n3m/covid-dashboard-server/infrastructure/api/covid"
 )
 
 const version = "0.0.1"
@@ -29,5 +30,5 @@ func SetRoutes(server *fiber.App) {
 	})
 
 	/* CUSTOM ENDPOINTS */
-	// server.Post("/covid/*", covid.QueryCustom)
+	server.Post("/covid", covid.QueryCustom)
 }
