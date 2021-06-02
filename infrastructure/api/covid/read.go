@@ -71,6 +71,7 @@ func QueryCustom(c *fiber.Ctx) error {
 		switch *filter.ResponseType {
 		case "BYSTATE":
 			filteredDocs := ConvertDataByState(documents)
+			db = db.Reset()
 			return c.Status(http.StatusOK).JSON(&models.Response{
 				Code:  http.StatusOK,
 				Error: nil,
@@ -79,6 +80,7 @@ func QueryCustom(c *fiber.Ctx) error {
 			})
 		case "BYPRIVPUB":
 			filteredDocs := ConvertDataByPubPriv(documents)
+			db = db.Reset()
 			return c.Status(http.StatusOK).JSON(&models.Response{
 				Code:  http.StatusOK,
 				Error: nil,
@@ -87,6 +89,7 @@ func QueryCustom(c *fiber.Ctx) error {
 			})
 		case "BYAGE":
 			filteredDocs := ConvertDataByAge(documents)
+			db = db.Reset()
 			return c.Status(http.StatusOK).JSON(&models.Response{
 				Code:  http.StatusOK,
 				Error: nil,
