@@ -18,6 +18,7 @@
     </nav>
     <div
         style="display: flex; justify-content: center; align-items: center; flex-direction: column; text-align: center; height: 90vh;">
+        
         <div class="container" style="text-align: center; font-size: medium;">
             <p>We are currently displaying all the infected people's ages, in order to provide as demographic of the
                 situation amongs the different group ages in México</p>
@@ -26,6 +27,14 @@
                 generations in order to mitigate the spread.</p>
             <br>
         </div>
+
+        <input type="radio" id="both" name="filter" onclick='both();' checked=true>
+        <label for="both">Both</label>
+        <input type="radio" id="male" name="filter" onclick='male();'>
+        <label for="male">Male</label>
+        <input type="radio" id="female" name="filter" onclick='female();'>
+        <label for="female">Female</label>
+
         <div class="container">
             <div class="row">
                 <div class="col-md-4">
