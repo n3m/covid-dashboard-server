@@ -49,3 +49,29 @@ In this build, you'll be able to see different kind of information regarding inf
 | `defunto`           | `[{"eq": any, "ne": any, "gte": any, "lte": any}]` | Filter Object ("any" can be any value, including null) |
 | `estadoResidencia`  | `[{"eq": any, "ne": any, "gte": any, "lte": any}]` | Filter Object ("any" can be any value, including null) |
 | `origen`            | `[{"eq": any, "ne": any, "gte": any, "lte": any}]` | Filter Object ("any" can be any value, including null) |
+
+## Graph Stories
+
+![Graph 1](https://via.placeholder.com/468x300?text=App+Screenshot+Here)
+
+We are currently displaying the deaths by each state of the Mexican Republic
+As imagined, deaths amongs each state, not only surpass a lot of health containment standards, but the growth is not going to stop soon.
+It is rumored that each state is holding on the real death toll, because of the governor's and city's reputations.
+
+![Graph 2](https://via.placeholder.com/468x300?text=App+Screenshot+Here)
+
+- This graph is able to show us information about each
+
+![Graph 3](https://via.placeholder.com/468x300?text=App+Screenshot+Here)
+
+We are currently displaying all the infected people's ages, in order to provide as demographic of the situation amongs the different group ages in México.
+From men, to women, we are looking at a major infection rate between age 20 and age 67.
+As published by the goverment, we need to implement better campaigns to get into the minds of the younger generations in order to mitigate the spread.
+
+![Graph 4](https://via.placeholder.com/468x300?text=App+Screenshot+Here)
+
+- This graph is able to show us information about each
+
+![Graph 5](https://via.placeholder.com/468x300?text=App+Screenshot+Here)
+
+- This graph is able to show us information about each
