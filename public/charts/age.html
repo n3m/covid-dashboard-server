@@ -18,24 +18,43 @@
     </nav>
     <div
         style="display: flex; justify-content: center; align-items: center; flex-direction: column; text-align: center; height: 90vh;">
-
-        <input type="radio" id="both" name="filter" onclick='both();' checked=true>
-        <label for="both">Both</label>
-        <input type="radio" id="male" name="filter" onclick='male();'>
-        <label for="male">Male</label>
-        <input type="radio" id="female" name="filter" onclick='female();'>
-        <label for="female">Female</label>
-
-        <div class="container">
-            <div class="row">
-                <div class="col-md-4">
-                    <form></form>
-                </div>
+        <div class="container" style="text-align: center; font-size: medium;">
+            <p>We are currently displaying all the infected people's ages, in order to provide as demographic of the
+                situation amongs the different group ages in México</p>
+            <p>From men, to women, we are looking at a major infection rate between age 20 and age 60.</p>
+            <p>As published by the goverment, we need to implement better campaigns to get into the minds of the younger
+                generations in order to mitigate the spread.</p>
+            <br>
+        </div>
+        <div style="display: flex; justify-content: space-evenly; align-items: center; ">
+            <div>
+                <label for="both">Both</label>
+                <input type="radio" id="both" name="filter" onclick='both();' checked=true>
             </div>
-            <div class="row">
-                <div class="col-md-12">
-                    <div id="chart-area"></div>
-                </div>
+            <div>
+                <label></label>
+            </div>
+            <div>
+                <label for="male">Male</label>
+                <input type="radio" id="male" name="filter" onclick='male();'>
+            </div>
+            <div>
+                <label></label>
+            </div>
+            <div>
+                <label for="female">Female</label>
+                <input type="radio" id="female" name="filter" onclick='female();'>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-4">
+                <form></form>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div id="chart-area"></div>
             </div>
         </div>
         <div class="container">
@@ -48,6 +67,7 @@
     </div>
     <!-- Bootstrap grid setup -->
     <div class="container" style="text-align: center;">
+        <br>
         <p>Guillermo Gonzalez Mena</p>
         <p>Alan Enrique Maldonado Navarro</p>
     </div>
