@@ -6,23 +6,91 @@ var margin = {
     bottom: 100,
 };
 
-var width = 600;
-var height = 400;
+var width = 600 - margin.left - margin.right,
+height = 400 - margin.top - margin.bottom;
 
 var svg = d3.select("#chart-area").append("svg")
     .attr("width", width + margin.right + margin.left)
 	.attr("height", height + margin.top + margin.bottom);
 
-var g = svg.append("g")
-.attr("transform", "translate(" + margin.left + ", " + margin.top + ")");
+var g = svg.append("g").attr("transform", "translate(" + margin.left + ", " + margin.top + ")");
+// X Label
+g.append("text")
+    .attr("class", "x axis-label")
+    .attr("x", width/2)
+    .attr("y", height+40)
+    .attr("font-size", "20px")
+    .attr("text-anchor", "middle")
+    .style("fill","black")
+    .text("States");
+// Y Label
+g.append("text")
+    .attr("class", "y axis-label")
+    .attr("x", -(height/2))
+    .attr("y", -60)
+    .attr("font-size", "20px")
+    .attr("text-anchor", "middle")
+    .style("fill","black")
+    .text("Death Count")
+    .attr("transform", "rotate(-90)");
 
-axios.post('/covid', {
-    "responseType":"BYSTATE",
-    "defunto":[{
-        "gte":0
-    }]
-}).then((response)=> {
-    console.log(response.data.data);
+var x = d3.scaleBand().range([0,width]).paddingInner(0.3).paddingOuter(0.3);
+var y = d3.scaleLinear().range([height,0]);
+
+var xAxisGroup = g.append("g")    
+    .attr("class", "x axis")    
+    .attr("transform", "translate(0, " + height + ")")
+var yAxisGroup = g.append("g")
+    .attr("class", "y axis");
+
+// Graphic starts with both sexs
+both();
+
+function both() {
+    setValues([],"black");
+}
+
+function male() {
+    setValues(
+        [
+            {
+                "eq":"HOMBRE",
+            },
+        ],
+        "cyan",
+    );
+}
+
+function female() {
+    setValues(
+        [
+            {
+                "eq":"MUJER",
+            },
+        ],
+        "pink",
+    );
+}
+
+function setValues(sex, color) {
+    axios.post('/covid', {
+        "responseType":"BYSTATE",
+        "sexo":sex,
+        "defunto":[{
+            "gte":0
+        }]
+    }).then((response)=> {
+        update(response, color);
+    }).catch((error) => {
+        console.log(error);
+    });
+}
+
+var t = d3.transition().duration(250);
+
+var color = "cyan";
+
+function update(response) {
     var keys = Object.keys(response.data.data);
     var data = [];
     keys.forEach((key) => {
@@ -32,69 +100,47 @@ axios.post('/covid', {
     var deadStates = data.map((d)=>{
         return d["State"];
     });
-    var x = d3.scaleBand()
-	.domain(deadStates)
-	.range([0,width])
-	.paddingInner(0.3)
-	.paddingOuter(0.3);
+
+    var rectangles = g.selectAll("rect")
+        .data(data);
+
+    rectangles.exit()
+        .transition(t)
+            .attr("y", y(0))
+            .attr("height", 0)
+        .remove();
+
+    x.domain(deadStates);
 
     var maxDeadHeight = d3.max(data, (d) =>{
         return d["Count"];
     });
-    var y = d3.scaleLinear()
-	.domain([0,maxDeadHeight])
-	.range([height,0]);
-
-    var rectangles = g.selectAll("rect")
-    .data(data);
+    y.domain([0,maxDeadHeight]);
 
     var bottomAxis = d3.axisBottom(x);
-    g.append("g")    
-        .attr("class", "bottom axis")    
-        .attr("transform", "translate(0, " + height + ")")    
-        .call(bottomAxis)        
-    .selectAll("text")
-        .attr("y", "10")
-        .attr("x", "10")
-        .attr("text-anchor", "end")
-    // X Label
-    g.append("text")
-    .attr("class", "x axis-label")
-    .attr("x", width/2)
-    .attr("y", height+40)
-    .attr("font-size", "20px")
-    .attr("text-anchor", "middle")
-    .style("fill","black")
-    .text("State");
+    xAxisGroup.transition(t).call(bottomAxis);
 
-    var leftAxis = d3.axisLeft(y).ticks(5)
-    g.append("g")
-        .attr("class", "left axis")
-        .call(leftAxis);
-    // Y Label
-    g.append("text")
-    .attr("class", "y axis-label")
-    .attr("x", -(height/2))
-    .attr("y", -60)
-    .attr("font-size", "20px")
-    .attr("text-anchor", "middle")
-    .style("fill","black")
-    .text("Death Count")
-	.attr("transform", "rotate(-90)");
+    var leftAxis = d3.axisLeft(y).ticks(5);
+    yAxisGroup.call(leftAxis);
 
-    rectangles.enter()
-    .append("rect")
-    .attr("x", (d) => { 
-        return x(d["State"]); 
-    })
-    .attr("y", (d) => { 
-        return y(d["Count"]); 
-    } )
-    .attr("width", x.bandwidth())
-    .attr("height", (d) => { 
-        return height-y(d["Count"]); 
-    })
-    .attr("fill", "cyan");
-}).catch((error) => {
-    console.log(error);
-});
+    rectangles.enter().append("rect")
+        .attr("y", y(0))    
+        .attr("height", 0)
+        .attr("x", (d) => { 
+            return x(d["State"]); 
+        })
+        .attr("width", x.bandwidth())
+        .merge(rectangles)
+        .transition(t)
+            .attr("x", (d) => { 
+                return x(d["State"]); 
+            })
+            .attr("width", x.bandwidth())
+            .attr("y", (d) => { 
+                return y(d["Count"]); 
+            } )
+            .attr("height", (d) => { 
+                return height-y(d["Count"]); 
+            })
+            .attr("fill", color);  
+}
