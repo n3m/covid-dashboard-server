@@ -47,7 +47,7 @@ var yAxisGroup = g.append("g")
 both();
 
 function both() {
-    setValues([],"black");
+    setValues([]);
 }
 
 function male() {
@@ -57,7 +57,6 @@ function male() {
                 "eq":"HOMBRE",
             },
         ],
-        "cyan",
     );
 }
 
@@ -68,11 +67,10 @@ function female() {
                 "eq":"MUJER",
             },
         ],
-        "pink",
     );
 }
 
-function setValues(sex, color) {
+function setValues(sex) {
     axios.post('/covid', {
         "responseType":"BYSTATE",
         "sexo":sex,
@@ -80,7 +78,7 @@ function setValues(sex, color) {
             "gte":0
         }]
     }).then((response)=> {
-        update(response, color);
+        update(response);
     }).catch((error) => {
         console.log(error);
     });
@@ -88,7 +86,7 @@ function setValues(sex, color) {
 
 var t = d3.transition().duration(250);
 
-function update(response, color) {
+function update(response) {
     var keys = Object.keys(response.data.data);
     var data = [];
     keys.forEach((key) => {
@@ -140,5 +138,9 @@ function update(response, color) {
             .attr("height", (d) => { 
                 return height-y(d["Count"]); 
             })
-            .attr("fill", color);  
+            .attr("fill", (d) => {
+                var fixedColor = d3.rgb(255,0,0);
+                fixedColor.r = (d["Count"]/maxDeadHeight)*fixedColor.r;
+                return fixedColor;
+            });
 }
