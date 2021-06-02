@@ -88,9 +88,7 @@ function setValues(sex, color) {
 
 var t = d3.transition().duration(250);
 
-var color = "cyan";
-
-function update(response) {
+function update(response, color) {
     var keys = Object.keys(response.data.data);
     var data = [];
     keys.forEach((key) => {
