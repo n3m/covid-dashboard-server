@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+
 <head>
     <meta charset="utf-8">
     <meta name="description" content="">
@@ -8,36 +9,47 @@
     <!-- Custom CSS -->
     <link rel="stylesheet" href="../css/style.css">
 </head>
+
 <body>
-    <nav class="navbar navbar-default">
-        <div class="container">
-        
+    <nav class="navbar navbar-dark bg-primary">
+        <div style="display: flex; justify-content: center; align-items: center; height: 100%;">
+            <b style="font-size: 4rem;">COVID Progression in México</b>
         </div>
     </nav>
+    <div
+        style="display: flex; justify-content: center; align-items: center; flex-direction: column; text-align: center; height: 90vh;">
 
-    <!-- Bootstrap grid setup -->
-    <div class="container">
-        <div class="row">
-            <div class="col-md-4">
-                <form></form>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4">
+                    <form></form>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div id="chart-area"></div>
+                </div>
             </div>
         </div>
-        <div class="row">
-            <div class="col-md-12">
-                <div id="chart-area"></div>                  
-            </div>
+        <div class="container">
+            <p>Are you finished? Click the button to return Home</p>
+            <form action="../index.html">
+                <input type="submit" class="btn btn-primary" value="Home" />
+            </form>
         </div>
+
     </div>
-    <form action="../index.html">
-        <input type="submit" value="Home" />
-    </form>
-
-<!-- External JS libraries -->
-<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-<script src="../js/jquery.min.js"></script>
-<script src="../js/bootstrap.min.js"></script>
-<script src="../js/d3.min.js"></script>
-<!-- Custom JS -->
-<script src="../js/origin.js"></script>
+    <!-- Bootstrap grid setup -->
+    <div class="container" style="text-align: center;">
+        <p>Guillermo Gonzalez Mena</p>
+        <p>Alan Enrique Maldonado Navarro</p>
+    </div>
+    <!-- External JS libraries -->
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="../js/jquery.min.js"></script>
+    <script src="../js/bootstrap.min.js"></script>
+    <script src="../js/d3.min.js"></script>
+    <!-- Custom JS -->
+    <script src="../js/origin.js"></script>
 
 </body>

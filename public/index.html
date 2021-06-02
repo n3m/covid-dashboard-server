@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+
 <head>
     <meta charset="utf-8">
     <meta name="description" content="">
@@ -8,24 +9,48 @@
     <!-- Custom CSS -->
     <link rel="stylesheet" href="css/style.css">
 </head>
+
 <body>
-    <nav class="navbar navbar-default">
-        <div class="container">
-        
+    <nav class="navbar navbar-dark bg-primary">
+        <div style="display: flex; justify-content: center; align-items: center; height: 100%;">
+            <b style="font-size: 4rem;">COVID Progression in México</b>
         </div>
     </nav>
-    <form action="charts/death.html">
-        <input type="submit" value="Deaths" />
-    </form>
-    <form action="charts/age.html">
-        <input type="submit" value="Ages" />
-    </form>
-    <form action="charts/origin.html">
-        <input type="submit" value="Origin" />
-    </form>
-    <form action="charts/infected.html">
-        <input type="submit" value="Infected" />
-    </form>
+    <div class="container">
+        <div style="height: 90vh; display: flex; flex-direction: column; justify-content: center; align-items: center;">
+            <div
+                style="display: flex; justify-content: center; align-items: center; flex-direction: column; text-align: center;">
+                <p style="font-size: 4rem;">México has a continuous growth of Coronavirus cases
+                </p>
+                <p style="font-size: 3rem;">Current goverment decisions and population mass-events are the enablers for
+                    this growth to continue.
+                </p>
+                <p style="font-size: 2rem;">Our website will allow you to see the statistics by yourself about each
+                    Mexican State in order for you to conscientize about what's happening in our country
+                </p>
+            </div>
+            <br>
+            <br>
+            <br>
+            <br>
+            <p>Please choose one of the following charts</p>
+            <hr>
+            <div style="display: flex; justify-content: space-evenly; align-items: center; ">
+                <form action="charts/death.html">
+                    <input type="submit" class="btn btn-danger" value="Deaths" />
+                </form>
+                <form action="charts/age.html">
+                    <input type="submit" class="btn btn-success" value="Ages" />
+                </form>
+                <form action="charts/origin.html">
+                    <input type="submit" class="btn btn-info" value="Origin" />
+                </form>
+                <form action="charts/infected.html">
+                    <input type="submit" class="btn btn-warning" value="Infected" />
+                </form>
+            </div>
+        </div>
+    </div>
     <!-- Bootstrap grid setup -->
     <div class="container">
         <div class="row">
@@ -35,15 +60,18 @@
         </div>
         <div class="row">
             <div class="col-md-12">
-                <div id="chart-area"></div>                  
+                <div id="chart-area"></div>
             </div>
         </div>
     </div>
-
+    <div class="container" style="text-align: center;">
+        <p>Guillermo Gonzalez Mena</p>
+        <p>Alan Enrique Maldonado Navarro</p>
+    </div>
     <!-- External JS libraries -->
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-<script src="js/jquery.min.js"></script>
-<script src="js/bootstrap.min.js"></script>
-<script src="js/d3.min.js"></script>
+    <script src="js/jquery.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/d3.min.js"></script>
 
 </body>
